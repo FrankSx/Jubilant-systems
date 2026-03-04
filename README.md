@@ -16,7 +16,7 @@
 
 ```bash
 # Clone and install
-git clone https://github.com/yourusername/adversarial-ml-tester.git
+git clone https://github.com/franksx/adversarial-ml-tester.git
 cd adversarial-ml-tester
 pip install -r requirements.txt
 
