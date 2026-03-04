@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  tester:
+    build: .
+    image: adversarial-ml-tester:latest
+    container_name: advml_tester
+    volumes:
+      - ./output:/app/output
+      - ./reports:/app/reports
+      - ./data:/app/data
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: generate -c 1000 -o output/profiles.json
+
+  # Optional: Run with custom model endpoint
+  tester-api:
+    build: .
+    image: adversarial-ml-tester:latest
+    container_name: advml_tester_api
+    volumes:
+      - ./output:/app/output
+    environment:
+      - MODEL_API_URL=http://model-api:8000/predict
+    command: test -m http://model-api:8000/predict -o output/test_results.json
+    depends_on:
+      - model-api
+
+  # Mock model API for testing
+  model-api:
+    image: python:3.11-slim
+    container_name: mock_model_api
+    ports:
+      - "8000:8000"
+    command: >
+      sh -c "pip install flask && 
+             echo 'from flask import Flask, request, jsonify; 
+             app = Flask(__name__); 
+             @app.route("/predict", methods=["POST"]); 
+             def predict(): return jsonify({"prediction": "class_1", "confidence": 0.95}); 
+             app.run(host="0.0.0.0", port=8000)' > app.py && 
+             python app.py"

